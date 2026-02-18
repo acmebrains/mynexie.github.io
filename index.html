@@ -563,13 +563,11 @@
                 <h1>The best AI when <span>privacy matters</span>.</h1>
                 <p>AI delivers immense benefits, but it's also exposing and eroding our identities. nexie lets you use AI while keeping your identity private.</p>
                 
-                <form class="signup-form" id="betaForm">
-//                    <input type="email" placeholder="Enter your email" required id="emailInput">
-                    <a href="https://forms.gle/T8WBswcHVAz1eXtV7">
-                    <button type="submit">Join the Beta</button>
-                        </a>
-                </form>
-                <p class="success-message" id="successMsg">🎉 You're on the list! We'll be in touch.</p>
+                <div class="signup-form">
+               <a href="https://forms.gle/T8WBswcHVAz1eXtV7" class="signup-form button">
+                Join the Beta
+               </a>
+              </div>
             </div>
         </section>
         
@@ -666,15 +664,5 @@
         </div>
     </footer>
     
-     <script>
-        document.getElementById('betaForm').addEventListener('submit', function(e) {
-             e.preventDefault();
-            const email = document.getElementById('emailInput').value;
-            console.log('Beta signup:', email);
-            document.getElementById('successMsg').style.display = 'block';
-            this.style.display = 'none';
-        });
-
-    </script>
 </body>
 </html>

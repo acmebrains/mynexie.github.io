@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nexie - private AI</title>
+    <link rel="icon" type="image/png" href="assets/nexie-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --nexie-green: #6DA76A;
+            --nexie-cream: #F7EDDD;
+            --nexie-teal: #116570;
+            --nexie-turquoise: #11ADB5;
+            --nexie-lavender: #B28EAE;
+            --text-dark: #222222;
+            --text-muted: #424242;
+            --bg-cream: #F7EDDD;
+            --bg-white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            height: 40px;
+        }
+        
+        .logo-icon {
+            height: 40px;
+            width: auto;
+        }
+        
+        .logo-wordmark {
+            height: 28px;
+            width: auto;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 140px 0 80px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-white) 0%, var(--bg-cream) 100%);
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-visual {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 40px;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-visual {
+                width: 200px;
+                height: 200px;
+                margin-bottom: 30px;
+            }
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(1px);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .blob-1 {
+            width: 65%;
+            height: 65%;
+            background: linear-gradient(135deg, #6DA76A 0%, #11ADB5 100%);
+            top: 10%;
+            left: 15%;
+            animation-delay: 0s;
+            opacity: 0.9;
+        }
+        
+        .blob-2 {
+            width: 50%;
+            height: 50%;
+            background: linear-gradient(135deg, #11ADB5 0%, #B28EAE 100%);
+            top: 35%;
+            left: 45%;
+            animation-delay: -2s;
+            opacity: 0.85;
+        }
+        
+        .blob-3 {
+            width: 45%;
+            height: 45%;
+            background: linear-gradient(135deg, #B28EAE 0%, #116570 100%);
+            top: 5%;
+            left: 50%;
+            animation-delay: -4s;
+            opacity: 0.8;
+        }
+        
+        .blob-4 {
+            width: 35%;
+            height: 35%;
+            background: linear-gradient(135deg, #116570 0%, #6DA76A 100%);
+            top: 55%;
+            left: 20%;
+            animation-delay: -1s;
+            opacity: 0.85;
+        }
+        
+        .blob-center {
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+        
+        .blob-center img {
+            width: 60%;
+            height: auto;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+                border-radius: 60% 40% 50% 50%;
+            }
+            25% {
+                transform: translate(10px, -15px) scale(1.05) rotate(5deg);
+                border-radius: 50% 60% 40% 50%;
+            }
+            50% {
+                transform: translate(-5px, 10px) scale(0.95) rotate(-5deg);
+                border-radius: 40% 50% 60% 50%;
+            }
+            75% {
+                transform: translate(-15px, -5px) scale(1.02) rotate(3deg);
+                border-radius: 50% 40% 50% 60%;
+            }
+        }
+        
+        .hero h1 {
+            font-family: 'Roboto', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 24px;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+        
+        .hero h1 span {
+            color: var(--nexie-green);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Signup Form */
+        .signup-form {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .signup-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 16px 24px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            background: var(--bg-white);
+            color: var(--text-dark);
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .signup-form input:focus {
+            outline: none;
+            border-color: var(--nexie-turquoise);
+        }
+        
+        .signup-form button {
+            padding: 16px 32px;
+            background: var(--nexie-green);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        }
+        
+        .signup-form button:hover {
+            background: var(--nexie-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(17, 101, 112, 0.3);
+        }
+        
+        /* Problem Statement */
+        .problem {
+            padding: 80px 0;
+            text-align: center;
+            background: var(--nexie-teal);
+            color: #fff;
+        }
+        
+        .problem h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .problem .highlight {
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+        
+        .problem .solution {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-top: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .problem .solution-logo {
+            height: 1.6rem;
+            width: auto;
+            vertical-align: baseline;
+            margin-right: 0.2em;
+            position: relative;
+            top: 0.15em;
+        }
+        
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: var(--bg-cream);
+        }
+        
+        .features h2 {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--text-dark);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--bg-white);
+            border: none;
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card .icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+        }
+        
+        /* Color-coded feature cards */
+        .feature-card.private .icon {
+            background: var(--nexie-green);
+        }
+        .feature-card.private h3 {
+            color: var(--nexie-green);
+        }
+        
+        .feature-card.personal .icon {
+            background: var(--nexie-turquoise);
+        }
+        .feature-card.personal h3 {
+            color: var(--nexie-teal);
+        }
+        
+        .feature-card h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        
+        .feature-card p {
+            color: var(--text-muted);
+        }
+        
+        /* Benefits List */
+        .benefits {
+            padding: 80px 0;
+            background: var(--bg-white);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--bg-cream);
+            border-radius: 12px;
+        }
+        
+        .benefit-item .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--nexie-turquoise);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .benefit-item h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+        
+        .benefit-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Press Section */
+        .press {
+            padding: 80px 0;
+            background: var(--bg-cream);
+        }
+        
+        .press h2 {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--nexie-teal);
+        }
+        
+        .press-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .press-item {
+            text-align: center;
+            color: var(--text-muted);
+        }
+        
+        .press-item a {
+            color: var(--nexie-teal);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .press-item a:hover {
+            color: var(--nexie-turquoise);
+            text-decoration: underline;
+        }
+        
+        /* CTA */
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+            background: var(--bg-white);
+        }
+        
+        .cta h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+            color: var(--text-dark);
+        }
+        
+        .cta p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: var(--nexie-teal);
+            color: #fff;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+        }
+        
+        .footer-copyright {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+        }
+        
+        .footer-copyright a {
+            color: var(--nexie-turquoise);
+            text-decoration: none;
+        }
+        
+        .footer-copyright a:hover {
+            color: #fff;
+        }
+        
+        /* Success message */
+        .success-message {
+            display: none;
+            color: var(--nexie-turquoise);
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 120px 0 60px;
+            }
+            
+            .signup-form {
+                flex-direction: column;
+            }
+            
+            .signup-form input {
+                min-width: 100%;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <img src="assets/nexie-icon.png" alt="" class="logo-icon">
+                <img src="assets/nexie-wordmark.png" alt="nexie" class="logo-wordmark">
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-visual">
+                    <div class="blob blob-1"></div>
+                    <div class="blob blob-2"></div>
+                    <div class="blob blob-3"></div>
+                    <div class="blob blob-4"></div>
+                    <div class="blob-center">
+                        <img src="assets/nexie-icon.png" alt="">
+                    </div>
+                </div>
+                <h1>The best AI when <span>privacy matters</span>.</h1>
+                <p>AI delivers immense benefits, but it's also exposing and eroding our identities. nexie lets you use AI while keeping your identity private.</p>
+                
+                <form class="signup-form" id="betaForm">
+                    <input type="email" placeholder="Enter your email" required id="emailInput">
+                    <button type="submit">Join the Beta</button>
+                </form>
+                <p class="success-message" id="successMsg">🎉 You're on the list! We'll be in touch soon.</p>
+            </div>
+        </section>
+        
+        <section class="problem">
+            <div class="container">
+                <h2>We've been exchanging our personal data to access free apps, but those apps aren't truly free. Your data has value. AI is the next application that wants your data.</h2>
+                <h2 class="highlight">Who will own your digital twin and your personal AI agents—built from your data?</h2>
+                <p class="solution">You can't get back all the data you've given away, but you can prevent AI from collecting more. And now you can own, control and benefit from your data.</p>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="container">
+                <h2>Built for You</h2>
+                <div class="feature-grid">
+                    <div class="feature-card private">
+                        <div class="icon">🔒</div>
+                        <h3>Private</h3>
+                        <p>Chat with leading AI models safely and anonymously. Your conversations stay yours.</p>
+                    </div>
+                    <div class="feature-card personal">
+                        <div class="icon">💡</div>
+                        <h3>Personal</h3>
+                        <p>Maintain context, relevance, and memory across AI services. Combine journals, chats, and ideas into your unique personal resource.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="benefits">
+            <div class="container">
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <div class="icon">✓</div>
+                        <div>
+                            <h4>Chat anonymously with leading LLMs</h4>
+                            <p>Save your conversations securely</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">✓</div>
+                        <div>
+                            <h4>Maintain context across services</h4>
+                            <p>Relevance and memory that follows you</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="icon">✓</div>
+                        <div>
+                            <h4>Own your data</h4>
+                            <p>Control its distribution and use</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="press">
+            <div class="container">
+                <h2>In the Press</h2>
+                <div class="press-logos">
+                    <div class="press-item">
+                        <p><strong>PR Newswire</strong></p>
+                        <a href="https://www.prnewswire.com/news-releases/tech-ceo-falls-for-ai-chatbot-launches-startup-to-deliver-private-personalized-ai-software-302510774.html" target="_blank">Read the announcement →</a>
+                    </div>
+                    <div class="press-item">
+                        <p><strong>GeekWire</strong></p>
+                        <a href="https://www.geekwire.com/2025/from-grief-to-innovation-seattle-tech-vets-building-personal-ai-tool-with-persistent-memory-and-privacy/" target="_blank">Read the feature →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta">
+            <div class="container">
+                <h2>Help shape the future of<br>personal thought and exploration.</h2>
+                <p>Join the beta and be among the first to experience nexie.</p>
+                <form class="signup-form" id="betaForm2">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Get Early Access</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-links">
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+            <p class="footer-copyright">© 2025 <a href="/acmebrains/">ACME Brains, Inc.</a> All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.getElementById('betaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            console.log('Beta signup:', email);
+            document.getElementById('successMsg').style.display = 'block';
+            this.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>
